@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.phpldapadmin.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.phpldapadmin.name }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.phpldapadmin.name }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.phpldapadmin.name }}
+    spec:
+      serviceAccountName: {{ .Values.phpldapadmin.name }}
+      containers:
+        - name: {{ .Values.phpldapadmin.name }}
+          image: {{ .Values.phpldapadmin.image }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PHPLDAPADMIN_HTTPS
+              value: {{ .Values.phpldapadmin.isHttps |quote }}
+            - name: PHPLDAPADMIN_LDAP_HOSTS
+              value: {{ printf "ldap://%s.%s.svc.cluster.local:%v" .Values.openldap.name .Release.Namespace .Values.openldap.port | quote }}
+          ports:
+            - name: 80-tcp
+              containerPort: {{ .Values.phpldapadmin.port }}

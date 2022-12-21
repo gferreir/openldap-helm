@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.openldap.name }}-ldif-file
+data:
+  populateLdap.ldif: |-
+{{ .Files.Get "populateLdap.ldif" | indent 4}}

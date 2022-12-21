@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.phpldapadmin.name }}
+spec:
+  type: ClusterIP
+  ports:
+  - name: 80-tcp
+    port: {{ .Values.phpldapadmin.port }}
+    protocol: TCP
+    targetPort: {{ .Values.phpldapadmin.port }}
+  - name: 443-tcp
+    port: {{ .Values.phpldapadmin.portHttps }}
+    protocol: TCP
+    targetPort: {{ .Values.phpldapadmin.portHttps }}
+  selector:
+    app.kubernetes.io/name: {{ .Values.phpldapadmin.name }}

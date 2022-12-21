@@ -1,0 +1,15 @@
+{{- if .Values.openldap.isPersistent -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.openldap.name }}-data
+  labels:
+    app.kubernetes.io/name: {{ .Values.openldap.name }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.openldap.pvcSize | quote }}
+  volumeMode: Filesystem
+{{- end }}

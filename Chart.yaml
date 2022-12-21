@@ -1,0 +1,6 @@
+apiVersion: v2
+type: application
+version: 0.0.1
+name: openldap
+description: Openldap + PHPldapadmin console helm chart for Kubernetes deployment
+appVersion: 1.0.0
