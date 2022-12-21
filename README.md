@@ -23,7 +23,33 @@ Thinking on this, this project can facilitate all these issues. This project cov
 
 ## Usage
 
+This repo is ready to go, so you can deploy in a kubernetes environment.
+
 ### Helm Chart
+
+To deploy natively on kubernetes, we are using [Helm Chart](https://helm.sh/) to make the job more easy.
+
+To deploy you'll need:
+- Kubernetes environment
+- Credentials with the necessary permissions
+
+> *first you need to clone this repo... (:*
+
+```sh
+helm install openldap ./
+```
+
+If you want to delete all resources, you can:
+
+```sh
+helm uninstall openldap ./
+```
+
+If you make any change in the chart, you can simply update it:
+
+```sh
+helm upgrade openldap ./
+```
 
 ### Configurations
 
